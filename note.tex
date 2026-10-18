@@ -1,0 +1,169 @@
+\documentclass[11pt]{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+%\usepackage[english,greek]{babel}
+\usepackage{alphabeta}  % Pour les lettres grecques en mode texte
+
+% Set page size and margins
+% Replace `letterpaper' with`a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+%\documentclass[11pt, a4paper]{article}
+\usepackage[T1]{fontenc}
+%\usepackage{amsmath, amssymb,amsthm}
+%\usepackage{amsfonts}
+\usepackage{physics}
+%\usepackage{graphicx}
+\usepackage{xcolor}
+%\usepackage{hyperref}
+%\usepackage{mathrsfs}
+\usepackage{dsfont}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{bm}
+
+\def\R{\mathbb{R}}
+%\newcommand\cor[1]{\textcolor{blue}{#1}}
+
+\definecolor{sereneblue}{RGB}{100, 149, 237}
+\definecolor{deepblue}{RGB}{70, 130, 180}
+\definecolor{lightgray}{RGB}{220, 220, 220}
+
+\parindent 0em
+
+\title{\color{deepblue} \textbf{A short note about the seminar of numerical analysis for dynamical systems}}
+\author{Franz Chouly}
+
+\begin{document}
+\maketitle
+
+\begin{quote}
+    \begin{otherlanguage}{greek}
+Χάος μὲν πρῶτον γένετο, Γαῖα δὲ εὐρύστερνος, \\
+πάντων ἕδος ἀσφαλὲς ἀθανάτων, οἳ ἔχουσι κάρηνα \\
+Ὄλυμπον χιονόεντα, Τάρταρος ἠερόεντα \\
+τεθλαμένος, Ἔρος δὲ καλλίστατος ἐν θεοῖσι.\\[1em]
+\end{otherlanguage}
+%\end{quote}
+%\textbf{Traduction anglaise :}
+%\begin{quote}
+At first Chaos came to be, but next wide-bosomed Earth, \\
+the ever-sure foundation of all the deathless ones who hold \\
+the peaks of snowy Olympus, and dim Tartarus \\
+in the depth of the wide-pathed Earth, and Eros (Love), \\
+fairest among the deathless gods, who unnerves the limbs \\
+and overcomes the mind and wise counsels of all gods and all men.\\[1em]
+Hésiode, \textit{Théogonie}, 116-120 (translated by H.G. Evelyn-White, 1914).
+\end{quote}
+
+\vspace{1em}
+
+%\textbf{Source :} Hésiode, \textit{Théogonie}, vers 116-120 (traduction adaptée de H.G. Evelyn-White, 1914).
+
+\begin{abstract}
+A small note related to the seminar of numerical analysis  for differential equations and dynamical systems (Udelar, PEDECIBA, 2026).
+\end{abstract}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\tableofcontents
+
+\newpage
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\section{Introduction (more or less autobiographic)}
+
+I write this note as a kind of entry point to the wonderful universe of numerical analysis related to dynamical systems in a broad sense, with emphasis on ordinary differential equations with geometric properties and the calculation of bifurcations. These notes are motivated by a seminar on this topic I organized in 2026 at the Udelar (Montevideo, Uruguay) for undergraduate and graduate students (in the framework of the Pedeciba program for graduate and doctoral studies). They are also inspired by a lot of discussions I had, by some talks I attended, and by reading some books.
+
+This story started very early with discussions on fractals and chaos I had with some close friends % Francois Barbut, Sophie Cahuzac
+but a turning point was some talks organised in Grenoble, France, when I did my engineering and doctoral studies there (2000--2006). Particularly two talks by Jacques Demongeot about dynamical systems in biology that were very inspiring, and an excellent talk by Yves Colin de Verdi\`ere on ergodicity. In parallel, I started reading some books by Benoit Mandelbrot about fractals and I had a very nice discussion with Jacques Viret (TIMC Laboratory, Grenoble), who was starting to write his book about topology and psychology. He even had the kindness to give me a first draft of this book. Jacques Demongeot, Jacques Viret and other mathematicians from TIMC were directly inspired by some works of Ren\'e Thom.
+I also had discussions on system dynamics, theoretical biology and complexity with Loic Forest and Nicolas Glade.
+
+Later on, when I was doing a postdoc in Paris, under the supervision of Miguel Fernandez, I worked on time-parallel time-integration for coupled partial differential equations (it was motivated by fluid-structure interactions in blood flows). The methods we studied underwent stability problems for conservative systems, like elastodynamics, and more generally for hamiltonian systems with symplectic geometric structure. This allowed me to discover many issues about numerical ordinary differential equations, the works of Martin Gander, Yvon Maday and other mathematicians, and the wonderful books by Ernst Hairer and colleagues. After two years of postdoc, I found no solution for this problem (I am still active on this issue in my free hours, and I still try some ideas with little success).
+
+Around 2016, Yves Renard and I were invited to publish a paper for a special issue of the journal \emph{Advanced Modeling and Simulation in Engineering Sciences}, on the topic \emph{Towards new paradigms for time integrators in computational dynamics}. This allowed me to study in more depth the St\"ormer--Verlet scheme and how it can be applied to contact in elastodynamics. I also had the opportunity to discuss with Laurent Monasse (at the WCCM 2016 in New York) and Fr\'ed\'eric Marazzato (I invited him for a talk in Dijon later on) about the new explicit time-marching scheme with pseudo-hamiltonian structure that they designed with C. Mariotti and A. Ern (MEMMS).
+
+Around the year 2020, I was invited by Kanty Rabenorosoa to co-supervise Emerson Takematsu, a master student from Brazil, on modelling and simulation for soft robotics. It involved mathematical models of thin structures (rods) and bifurcation analysis. I had some exchanges by email with Florence Bertails and Basile Audoly who are great experts on the topic. They suggested I have a look at the book by R. Seydel to start understanding the topic of numerical bifurcations. 
+%
+I had also some nice discussions with
+Christian Bonatti in the coffee room of the IMB (Dijon), particularly about the Brouwer fixed point theorem, and I met a lot of Latin American students he worked with.
+%
+Before leaving Dijon, I had the first opportunity to give lectures there on numerical ordinary differential equations, to students of the international master of mathematical physics.
+
+Now, in Montevideo, I had the opportunity to hear some talks by colleagues from the dynamical systems group, particularly by Sofia Llavayol, Roberto Markarian, Alessandro Passeggi and Raphael Potrie, and also to have some discussions with Fran\c{c}oise Dal'Bot, Alessandro Passeggi, Sofia Llavayol and Mauricio Velasco, particularly about the detection and characterization of chaos in dissipative and hamiltonian dynamical systems. %REF
+This inspired a research project (PREXI Pedeciba) that I carried out with Guillermo Bustos, a talented undergraduate student who was under my supervision in 2025. 
+On the other hand, I had the chance to start other related activities, such as lectures on numerical differential equations (with a related book that has been published by the Dirac editions), discussions with Marcelo Forets about reachability analysis and discussions with Benjamin Georgette and C\'edric Pozzolini about Poisson's structures for continuum thermomechanics. 
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\section{A few basic references}
+
+\begin{itemize}
+    \item Hairer et al. Geometric numerical integration.
+    \item Seydel. Bifurcations.
+\end{itemize}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\section{Some key notions}
+
+% Hamiltonian dynamics
+
+% Varieties and Lie groups
+
+% Structure preserving numerical methods
+
+% Bifurcations
+
+% Towards chaos
+% % Birkhoff
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+% To go further
+
+% Feischl
+% Kehlet
+% Mariotti
+
+\section{To go further}
+
+Here are some suggestions of reading related to the topic: 
+\cite{chorin}.
+
+\section{Acknowledgements}
+
+%Francoise etc etc
+
+% \author{Franz Chouly \and Marcelo Forets \and 
+% Benjamin Georgette \and 
+% Cl\'ement Grenat \and
+% Sof\'ia Llavayol \and 
+% Alejandro Passeggi}
+
+
+\bibliographystyle{siam}
+\bibliography{biblio}
+
+\end{document}
