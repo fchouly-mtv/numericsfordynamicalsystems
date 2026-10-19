@@ -72,7 +72,7 @@ Hésiode, \textit{Théogonie}, 116-120 (translated by H.G. Evelyn-White, 1914).
 %\textbf{Source :} Hésiode, \textit{Théogonie}, vers 116-120 (traduction adaptée de H.G. Evelyn-White, 1914).
 
 \begin{abstract}
-A small note related to the seminar of numerical analysis  for differential equations and dynamical systems (Udelar, PEDECIBA, 2026).
+This is a small introductive note related to the seminar of numerical analysis  for differential equations and dynamical systems (Udelar, PEDECIBA, 2026).
 \end{abstract}
 
 \vspace{0.5cm}
@@ -89,53 +89,312 @@ A small note related to the seminar of numerical analysis  for differential equa
 
 \section{Introduction (more or less autobiographic)}
 
-I write this note as a kind of entry point to the wonderful universe of numerical analysis related to dynamical systems in a broad sense, with emphasis on ordinary differential equations with geometric properties and the calculation of bifurcations. These notes are motivated by a seminar on this topic I organized in 2026 at the Udelar (Montevideo, Uruguay) for undergraduate and graduate students (in the framework of the Pedeciba program for graduate and doctoral studies). They are also inspired by a lot of discussions I had, by some talks I attended, and by reading some books.
+I write this note as a kind of entry point to the wonderful universe of numerical analysis related to dynamical systems in a broad sense, with emphasis on ordinary differential equations with geometric properties and the calculation of bifurcations. These notes are motivated by a seminar on this topic I am organizing in 2026 at the Udelar (Montevideo, Uruguay) for undergraduate and graduate students (in the framework of the Pedeciba program for graduate and doctoral studies). They are also inspired by a lot of discussions I had, by some talks I attended, and by reading some books.
+
+\medskip
 
 This story started very early with discussions on fractals and chaos I had with some close friends % Francois Barbut, Sophie Cahuzac
-but a turning point was some talks organised in Grenoble, France, when I did my engineering and doctoral studies there (2000--2006). Particularly two talks by Jacques Demongeot about dynamical systems in biology that were very inspiring, and an excellent talk by Yves Colin de Verdi\`ere on ergodicity. In parallel, I started reading some books by Benoit Mandelbrot about fractals and I had a very nice discussion with Jacques Viret (TIMC Laboratory, Grenoble), who was starting to write his book about topology and psychology. He even had the kindness to give me a first draft of this book. Jacques Demongeot, Jacques Viret and other mathematicians from TIMC were directly inspired by some works of Ren\'e Thom.
-I also had discussions on system dynamics, theoretical biology and complexity with Loic Forest and Nicolas Glade.
+but a turning point was some talks organised in Grenoble, France, where I did my engineering and doctoral studies (2000--2006). Particularly I remember two talks by Jacques Demongeot about dynamical systems in biology, that  were very inspiring, and an excellent talk by Yves Colin de Verdi\`ere on ergodicity. In parallel, I started reading some books by Benoit Mandelbrot about fractals~\cite{mandelbrot} and I had a very nice discussion with Jacques Viret (TIMC Laboratory, Grenoble), who was starting to write his book about topology and psychology~\cite{viret}. He even had the kindness to give me a first draft of this book for revision. Jacques Demongeot, Jacques Viret and other mathematicians from TIMC were directly inspired by some works by Ren\'e Thom.
+I also had discussions on dynamical systems, theoretical biology and complexity with other colleagues, notably Loic Forest and Nicolas Glade.
 
-Later on, when I was doing a postdoc in Paris, under the supervision of Miguel Fernandez, I worked on time-parallel time-integration for coupled partial differential equations (it was motivated by fluid-structure interactions in blood flows). The methods we studied underwent stability problems for conservative systems, like elastodynamics, and more generally for hamiltonian systems with symplectic geometric structure. This allowed me to discover many issues about numerical ordinary differential equations, the works of Martin Gander, Yvon Maday and other mathematicians, and the wonderful books by Ernst Hairer and colleagues. After two years of postdoc, I found no solution for this problem (I am still active on this issue in my free hours, and I still try some ideas with little success).
+\medskip
 
-Around 2016, Yves Renard and I were invited to publish a paper for a special issue of the journal \emph{Advanced Modeling and Simulation in Engineering Sciences}, on the topic \emph{Towards new paradigms for time integrators in computational dynamics}. This allowed me to study in more depth the St\"ormer--Verlet scheme and how it can be applied to contact in elastodynamics. I also had the opportunity to discuss with Laurent Monasse (at the WCCM 2016 in New York) and Fr\'ed\'eric Marazzato (I invited him for a talk in Dijon later on) about the new explicit time-marching scheme with pseudo-hamiltonian structure that they designed with C. Mariotti and A. Ern (MEMMS).
+Later on, in 2008--2009, when I was doing a postdoc in Paris, under the supervision of Miguel Fern\'andez, I worked on time-parallel time-integration for coupled partial differential equations (it was motivated by fluid-structure interactions in blood flows). The methods we studied underwent stability problems for conservative systems, like elastodynamics, and more generally for hamiltonian systems with symplectic geometric structure. This allowed me to discover many issues about numerical ordinary differential equations, the works of Martin Gander, Yvon Maday and other mathematicians, and the wonderful books by Ernst Hairer and colleagues. After two years of postdoc, I found no solution for this problem (I am still active on this issue in my free hours, and I still try some ideas with little success).
 
-Around the year 2020, I was invited by Kanty Rabenorosoa to co-supervise Emerson Takematsu, a master student from Brazil, on modelling and simulation for soft robotics. It involved mathematical models of thin structures (rods) and bifurcation analysis. I had some exchanges by email with Florence Bertails and Basile Audoly who are great experts on the topic. They suggested I have a look at the book by R. Seydel to start understanding the topic of numerical bifurcations. 
-%
+\medskip
+
+Around 2016, Yves Renard and I were invited to publish a paper~\cite{chouly2018explicit} for a special issue of the journal \emph{Advanced Modeling and Simulation in Engineering Sciences}, on the topic \emph{Towards new paradigms for time integrators in computational dynamics}. This allowed me to study in more depth the St\"ormer--Verlet scheme and how it can be applied to contact in elastodynamics. I also had the opportunity to discuss with Laurent Monasse (at the WCCM 2016 in New York) and Fr\'ed\'eric Marazzato (I invited him for a talk in Dijon later on) about the new explicit time-marching scheme with pseudo-hamiltonian structure that they designed with Christian Mariotti and Alexandre Ern~\cite{marazzato2019}.
+
+\medskip
+
+Around the year 2020, I was invited by Kanty Rabenorosoa to co-supervise Emerson Takematsu, a master student from Brazil, on modelling and simulation for soft robotics. It involved mathematical models of thin structures (rods) and bifurcation analysis. I had some interactions with Florence Bertails and S\'ebastien Neukirch who are outstanding contributors to the topic, see for instance their joint work~\cite{bertails2025noether}, and the work of S\'ebastien Neukirch with Basile Audoly, about spaghettis~\cite{audoly2005spaghetti} (Ig Nobel Prize 2006). They suggested I have a look at the book by R. Seydel to start understanding the topic of numerical bifurcations. 
+
+\medskip
+
 I had also some nice discussions with
 Christian Bonatti in the coffee room of the IMB (Dijon), particularly about the Brouwer fixed point theorem, and I met a lot of Latin American students he worked with.
 %
-Before leaving Dijon, I had the first opportunity to give lectures there on numerical ordinary differential equations, to students of the international master of mathematical physics.
+Before leaving Dijon, I had the first opportunity to give lectures there on numerical ordinary differential equations, to students of the international master of mathematical physics~\cite{chouly:hal-03212748}.
 
-Now, in Montevideo, I had the opportunity to hear some talks by colleagues from the dynamical systems group, particularly by Sofia Llavayol, Roberto Markarian, Alessandro Passeggi and Raphael Potrie, and also to have some discussions with Fran\c{c}oise Dal'Bot, Alessandro Passeggi, Sofia Llavayol and Mauricio Velasco, particularly about the detection and characterization of chaos in dissipative and hamiltonian dynamical systems. %REF
+\medskip
+
+Now, and since 2024, in Montevideo, I have the chance to hear some talks by colleagues from the dynamical systems group, particularly by Sof\'ia Llavayol, Roberto Markarian, Alessandro Passeggi and Raphael Potrie, and also to have some discussions with Fran\c{c}oise Dal'Bo, Alessandro Passeggi, Sof\'ia Llavayol and Mauricio Velasco (see for instance
+\cite{dalbo2026ifumi} and \cite{markarian2025dimension} for the general context). Most of the discussions are about the practical detection and characterization of chaos, due to recent breakthrough from Alessandro and his colleagues~\cite{capi,passeggi2026conditions}.
 This inspired a research project (PREXI Pedeciba) that I carried out with Guillermo Bustos, a talented undergraduate student who was under my supervision in 2025. 
-On the other hand, I had the chance to start other related activities, such as lectures on numerical differential equations (with a related book that has been published by the Dirac editions), discussions with Marcelo Forets about reachability analysis and discussions with Benjamin Georgette and C\'edric Pozzolini about Poisson's structures for continuum thermomechanics. 
+On the other hand, I had the chance to start other related activities, such as lectures on numerical differential equations (with a related book that has been published by the Dirac editions), discussions with Marcelo Forets, Jorge Perez and Juan Pablo Borthagaray about reachability analysis and discussions with Benjamin Georgette and C\'edric Pozzolini about Poisson's structures for continuum thermomechanics. 
+
 \vspace{0.5cm}
 \hrule
 \vspace{0.5cm}
 
-\section{A few basic references}
+\section{Basic references}
 
-\begin{itemize}
-    \item Hairer et al. Geometric numerical integration.
-    \item Seydel. Bifurcations.
-\end{itemize}
+The two main references of the seminar are the following.
+
+\subsection{Hairer, Lubich and Wanner}
+
+The monograph of
+Hairer, Lubich and Wanner~\cite{hairer2006}, first published in
+2002 is by now a reference on geometric numerical
+integration. The book develops the modern theory of
+structure-preserving time integrators for ordinary differential
+equations: rather than viewing a numerical scheme merely as an
+approximation tool with a given order of accuracy, the authors
+promote the viewpoint that a good integrator should inherit the
+geometric structure of the flow it approximates. This leads to a
+systematic study of symplectic methods for Hamiltonian systems.
+
+% -- whose central tool is backward error analysis, showing that a
+% symplectic integrator is the exact flow of a modified
+% Hamiltonian over exponentially long time intervals -- as well as
+% of symmetric methods for reversible systems,
+% variational integrators, methods preserving first integrals and
+% Lyapunov functions, and splitting and composition techniques
+% that build complex schemes from elementary flows. Beyond the
+% construction of methods, the book provides the analytical
+% machinery needed to assess their long-time behaviour: modified
+% equations, Hamiltonian and reversible perturbation theory,
+% KAM-type results for numerical flows, and linear and nonlinear
+% stability analysis, always with an eye on the energy behaviour
+% over long time spans. Extensive numerical experiments -- the
+% famous ``folklore'' observations on the energy drift of
+% non-symplectic versus symplectic schemes -- illustrate the
+% theory and make the book simultaneously a research monograph
+% and a practical guide. 
+
+\subsection{Seydel}
+
+A possible entry point to the numerical side of bifurcation
+analysis is the book of Seydel~\cite{seydel2010}, whose third
+edition summarises three decades of development of the field.
+The central object of the book is the computation of
+stationary solutions and their stability, and the systematic
+numerical detection of the bifurcations through which solution
+branches lose or exchange stability: turning points,
+branch points, Hopf bifurcations and the routes they open
+towards periodic orbits and chaotic regimes. The distinctive
+feature of the approach is that bifurcation analysis is
+formulated as a numerical continuation problem: solution
+branches are traced by combining Newton-type solvers with
+predictor--corrector path-following strategies, and
+bifurcation points are detected and located as special
+solutions of augmented systems. 
+% The book carefully develops all
+% the practical machinery needed for this program -- test
+% functions, direct methods for locating bifurcation points,
+% strategies for branch switching, and the treatment of
+% larger systems via condensation of parameters -- always
+% balancing the underlying theory with algorithmic detail and
+% worked examples, which explains why it has served for decades
+% as both a textbook and a reference for practitioners. For the
+% purposes of the present note, it provides the natural
+% complement to~\cite{hairer2006}: geometric numerical
+% integration is concerned with the faithful long-time behaviour
+% of a single trajectory, whereas bifurcation analysis addresses
+% the structure of the whole family of solutions of the equation
+% as a parameter varies.
+
+% \begin{itemize}
+%     \item Hairer et al. Geometric numerical integration.
+%     \item Seydel. Bifurcations.
+% \end{itemize}
 
 \vspace{0.5cm}
 \hrule
 \vspace{0.5cm}
 
 \section{Some key notions}
+%\subsection{The four themes of the seminar}\label{sec:themes}
 
-% Hamiltonian dynamics
+The seminar is structured around the following topics. %, which we briefly
+%introduce here in an elementary way, keeping the technical
+%formalism to the minimum needed to state the central ideas.
 
-% Varieties and Lie groups
+\subsection{Time integration for Hamiltonian dynamics} %and
+%structure-preserving methods}
 
-% Structure preserving numerical methods
+Many physical systems -- planetary motion, elasticity, wave
+phenomena -- are described by a function $H(q,p)$ of positions
+$q$ and momenta $p$, called the \emph{Hamiltonian}, and evolve
+according to Hamilton's equations
+\begin{equation}\label{eq:hamilton}
+  \dot q = \frac{\partial H}{\partial p}(q,p),
+  \qquad
+  \dot p = -\frac{\partial H}{\partial q}(q,p).
+\end{equation}
+This seemingly simple structure has a remarkable consequence: the
+flow of~\eqref{eq:hamilton} preserves the total energy
+$H(q(t),p(t))$ and the volume in phase space. A natural question
+is whether a numerical scheme can inherit these properties.
+The answer is generally no for classical schemes: for instance,
+the explicit Euler method applied to a harmonic oscillator
+($H=\tfrac12(p^2+q^2)$) produces a discrete orbit spiralling
+outwards, so the computed energy grows without bound. In
+contrast, the \emph{symplectic Euler} method, which updates $p$
+before $q$ using the fresh value,
+\begin{equation}\label{eq:symplectic-euler}
+  p_{n+1} = p_n - h\,\frac{\partial H}{\partial q}(q_n,p_{n+1}),
+  \qquad
+  q_{n+1} = q_n + h\,\frac{\partial H}{\partial p}(q_n,p_{n+1}),
+\end{equation}
+preserves the symplectic structure of the flow and, by backward
+error analysis, behaves over exponentially long times like the
+exact flow of a slightly perturbed Hamiltonian. This is the
+central theme of~\cite{hairer2006} and the guiding principle of
+structure-preserving integration: \emph{the discretization
+should respect the geometry of the equation}.
 
-% Bifurcations
+\subsection{Numerical integration on Lie groups}
 
-% Towards chaos
-% % Birkhoff
+Some systems are constrained to live on a curved set carrying a
+group structure -- rotations of a rigid body, unit quaternions
+for orientation, orthogonal matrices -- collectively called Lie
+groups. A numerical method that treats the coordinates as if
+they lived in a flat space $\R^d$ produces iterates that leave
+the group, destroying the invariants of the problem. The remedy
+is to express the motion \emph{through} the group using the
+exponential map. If $G$ is a matrix group and
+$\mathfrak g = T_eG$ its tangent space at the identity, the
+flow of a vector field on $G$ can be advanced by solving an
+equation in the tangent space and mapping the result back:
+\begin{equation}\label{eq:exp}
+  y(t) = \exp\bigl(\xi(t)\bigr)\,y(0),
+  \qquad \xi(t)\in\mathfrak g,
+\end{equation}
+where $\exp$ is the matrix exponential. This is the principle
+of \emph{Lie group methods}: the update of $\xi$ is computed by
+a classical scheme, while the exponential guarantees that
+$y(t)$ remains on $G$ at every step. 
+% On the practical side, one
+% replaces $\exp$ by cheaper approximations (Cayley transform,
+% commutator-free schemes) -- a compromise between exact
+% preservation of the geometry and computational cost. For the
+% rigid body, this viewpoint is what allows the numerical solution
+% to respect the length constraint and the conservation of angular
+% momentum.
+
+\subsection{Reachability analysis}\label{sec:reachability}
+
+The last decade has seen the rise of a complementary question:
+rather than computing or simulating individual trajectories,
+one asks what is the \emph{set of all possible states} that a
+system can attain. This is the subject of \emph{reachability
+analysis}. The motivation is twofold. First, many systems are
+subject to uncertainty: uncertain initial conditions, uncertain
+parameters, or inputs chosen by an external agent. Second,
+many applications -- verification of safety properties,
+control synthesis, air-traffic management, robotics -- require
+guarantees that hold for \emph{all} trajectories at once, not
+merely for simulated ones. A typical safety question reads:
+\emph{is it true that every trajectory starting in the initial
+set $X_0$ avoids the unsafe set $U$ for all times $t\in[0,T]$?}
+
+The mathematical formulation can be as follows. Given a discrete
+dynamics $x_{n+1}=\varphi(x_n)$ and a set of initial states
+$X_0$, the \emph{reachable set} after $N$ steps is defined
+recursively by
+\begin{equation}\label{eq:reach}
+  \mathcal R_0 = X_0,
+  \qquad
+  \mathcal R_{n+1} = \varphi(\mathcal R_n)
+  := \{\varphi(x) : x\in\mathcal R_n\},
+\end{equation}
+and the safety question becomes
+$\mathcal R_n \cap U = \varnothing$ for all $n\le N$. 
+% The
+% difficulty is that these sets are impossible to compute
+% exactly for nonlinear systems: already for the two-dimensional
+% map $\varphi(x_1,x_2)=(x_2, x_2^2 + x_1)$ (a variant of the
+% H\'enon map) the reachable sets quickly acquire convoluted
+% boundaries. The practical solution is to approximate them by
+% simple families of sets -- ellipsoids, zonotopes (Minkowski
+% sums of segments), polytopes, or support functions -- and to
+% propagate the approximation instead:
+% \begin{equation}\label{eq:supp}
+%   \rho_{\mathcal R_{n+1}}(\ell)
+%   \;\le\; \max_{x\in\mathcal R_n}\ \langle \ell,
+%   \varphi(x)\rangle,
+%   \qquad
+%   \rho_{\mathcal S}(\ell) = \max_{x\in\mathcal S}\langle
+%   \ell,x\rangle,
+% \end{equation}
+% where the \emph{support function} $\rho_{\mathcal S}$
+% characterizes a convex set by its projections in all
+% directions $\ell$, and inequality~\eqref{eq:supp} allows one to
+% propagate enclosures direction by direction without ever
+% manipulating the sets themselves. This is the key idea of
+% modern reachability tools: the family of approximating sets
+% must be closed under the dynamics \emph{up to an enclosure},
+% so that the computed over-approximation remains a guaranteed
+% outer bound of the true reachable set, making the negative
+% answer to a safety question rigorous: if the enclosure avoids
+% $U$, then so does every trajectory. The interplay between the
+% geometry of the approximating sets and the dynamics of the
+% system -- linear, nonlinear, Hamiltonian -- makes reachability
+% analysis a natural bridge between the convex-geometric and the
+% dynamical themes of this note.
+
+\subsection{Numerical computation of bifurcations}
+
+When a differential equation depends on a parameter $\lambda$,
+\begin{equation}\label{eq:param}
+  \dot x = f(x,\lambda),
+  \qquad x\in\R^n,\ \lambda\in\R,
+\end{equation}
+the structure of its equilibrium solutions -- points $x$ with
+$f(x,\lambda)=0$ -- can change qualitatively as $\lambda$
+crosses special values, called \emph{bifurcation points}. The
+simplest example is the one-dimensional equation
+\begin{equation}\label{eq:saddle-node}
+  \dot x = \lambda - x^2,
+\end{equation}
+which has two equilibria $x=\pm\sqrt{\lambda}$ for $\lambda>0$,
+one stable and one unstable, and no equilibrium at all for
+$\lambda<0$: at $\lambda=0$ a pair of equilibria is born
+(\emph{saddle-node bifurcation}). Numerical bifurcation
+analysis aims to \emph{compute} such phenomena: one traces the
+branch of equilibria with a continuation method (a
+predictor--corrector algorithm driven by Newton's method),
+monitors \emph{test functions} whose vanishing signals a
+bifurcation, and solves augmented systems to locate the
+bifurcation point precisely and switch to the emerging branch.
+This is the algorithmic core of~\cite{seydel2010}. The
+difficulty, and the interest of the subject, is that the
+bifurcation is a global property of the branch: no local
+information at a single point reveals it.
+
+% \subsection{Towards chaos in the sense of Birkhoff}
+
+% The last theme concerns the long-time statistical behaviour of
+% dynamical systems. A first intuition of chaos is the
+% \emph{sensitive dependence on initial conditions}: two nearby
+% trajectories separate exponentially fast,
+% \begin{equation}\label{eq:lyapunov}
+%   |x_n - \tilde x_n| \;\approx\; |x_0 - \tilde x_0|\,e^{\lambda n},
+%   \qquad \lambda > 0,
+% \end{equation}
+% where $x_{n+1}=\varphi(x_n)$ is a discrete dynamics (the
+% celebrared example is the tent map on $[0,1]$). But sensitivity
+% alone does not imply disorder, and Birkhoff proposed in the
+% 1920s a stricter and more beautiful criterion: a system is
+% \emph{chaotic in the sense of Birkhoff} if almost every
+% trajectory is \emph{equidistributed} with respect to an
+% invariant measure, that is, the fraction of time it spends in a
+% set is asymptotically proportional to the measure of that set:
+% \begin{equation}\label{eq:birkhoff}
+%   \frac{1}{N}\sum_{n=0}^{N-1} g(x_n)
+%   \;\xrightarrow[N\to\infty]{}\;
+%   \int g\,d\mu
+%   \qquad \text{for any observable } g,
+% \end{equation}
+% where $\mu$ is the natural invariant measure of the system.
+% This is the content of Birkhoff's ergodic theorem. In this
+% perspective, chaos is not only divergence of trajectories but
+% the emergence of \emph{statistical regularity}: even though
+% each individual trajectory is unpredictable, the ensemble of
+% trajectories obeys a precise law. Detecting and characterizing
+% this transition to chaos -- numerically and theoretically -- was
+% the final theme of the seminar.
 
 \vspace{0.5cm}
 \hrule
@@ -147,21 +406,26 @@ On the other hand, I had the chance to start other related activities, such as l
 % Kehlet
 % Mariotti
 
-\section{To go further}
+% \section{To go further}
 
-Here are some suggestions of reading related to the topic: 
-\cite{chorin}.
+% Here are some suggestions of reading related to the topic: 
+% \cite{chorin}.
 
 \section{Acknowledgements}
 
-%Francoise etc etc
-
-% \author{Franz Chouly \and Marcelo Forets \and 
-% Benjamin Georgette \and 
-% Cl\'ement Grenat \and
-% Sof\'ia Llavayol \and 
-% Alejandro Passeggi}
-
+For recent discussions we had on the topic,
+special thanks to 
+Guillermo Bustos,
+Alexandre Ern,
+Benjamin Georgette,
+Cl\'ement Grenat,
+Francoise Dal'Bo,
+Marcelo Forets,
+Sof\'ia Llavayol,
+Alessandro Passeggi,
+Cedric Pozzolini,
+Yves Renard and
+Mauricio Velasco.
 
 \bibliographystyle{siam}
 \bibliography{biblio}
